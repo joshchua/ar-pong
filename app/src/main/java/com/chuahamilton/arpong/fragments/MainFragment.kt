@@ -1,4 +1,4 @@
-package com.chuahamilton.arpong.ui.main
+package com.chuahamilton.arpong.fragments
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -6,7 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gvsu.mobile.R
+import com.chuahamilton.arpong.R
+import com.chuahamilton.arpong.viewmodels.MainViewModel
 
 class MainFragment : Fragment() {
 

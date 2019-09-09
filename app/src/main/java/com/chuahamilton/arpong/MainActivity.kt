@@ -2,7 +2,7 @@ package com.chuahamilton.arpong
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.chuahamilton.arpong.ui.main.MainFragment
+import com.chuahamilton.arpong.fragments.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

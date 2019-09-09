@@ -1,4 +1,4 @@
-package com.chuahamilton.arpong.ui.main
+package com.chuahamilton.arpong.viewmodels
 
 import androidx.lifecycle.*
 
