@@ -2,11 +2,14 @@ package com.chuahamilton.arpong
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.chuahamilton.arpong.ui.main.MainFragment
+import com.chuahamilton.arpong.fragments.MainFragment
+import java.lang.Thread.sleep
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+        sleep(1000)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
