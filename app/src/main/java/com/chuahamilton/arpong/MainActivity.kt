@@ -2,7 +2,7 @@ package com.chuahamilton.arpong
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.chuahamilton.arpong.fragments.MainFragment
+import com.chuahamilton.arpong.fragments.BaseFragment
 import java.lang.Thread.sleep
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .replace(R.id.container, BaseFragment())
                 .commitNow()
         }
     }
