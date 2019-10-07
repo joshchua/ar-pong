@@ -41,6 +41,9 @@ dependencies {
     // Provides ARCore Session and related resources.
     implementation 'com.google.ar:core:1.12.0'
 
+    // Sceneform dependency
+    implementation "com.google.ar.sceneform.ux:sceneform-ux:1.12.0"
+
     //Gif dependency
     implementation("com.github.bumptech.glide:glide:4.9.0") {
         exclude group: "com.android.support"
