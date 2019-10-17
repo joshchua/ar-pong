@@ -50,14 +50,19 @@ dependencies {
     }
 }
 
-// Ball asset dependency
+
+
+sceneform.asset('sampledata/paddle.obj',
+        'default',
+        'sampledata/paddle.sfa',
+        'src/main/assets/paddle')
+
 sceneform.asset('sampledata/ball.obj',
-        'sampledata/ball.mtl',
+        'default',
         'sampledata/ball.sfa',
         'src/main/assets/ball')
 
-// Paddle asset dependency
-sceneform.asset('sampledata/paddle.obj',
-        'sampledata/paddle.mtl',
-        'sampledata/paddle.sfa',
-        'src/main/assets/paddle')
+sceneform.asset('sampledata/Tennis_Ball_01.obj',
+        'default',
+        'sampledata/Tennis_Ball_01.sfa',
+        'src/main/assets/Tennis_Ball_01')

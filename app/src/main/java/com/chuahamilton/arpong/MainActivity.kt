@@ -1,7 +1,7 @@
 package com.chuahamilton.arpong
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.chuahamilton.arpong.fragments.BaseFragment
 import java.lang.Thread.sleep
 

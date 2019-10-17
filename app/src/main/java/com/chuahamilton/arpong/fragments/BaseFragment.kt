@@ -1,43 +1,62 @@
 package com.chuahamilton.arpong.fragments
 
-import androidx.lifecycle.ViewModelProviders
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.chuahamilton.arpong.R
-import com.chuahamilton.arpong.viewmodels.MainViewModel
-import com.chuahamilton.arpong.MainActivity
-import android.widget.Toast
-import android.content.Context.ACTIVITY_SERVICE
-import android.app.ActivityManager
 import android.app.Activity
+import android.app.ActivityManager
+import android.content.Context.ACTIVITY_SERVICE
+import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import com.chuahamilton.arpong.MainActivity
+import com.chuahamilton.arpong.R
 import com.chuahamilton.arpong.util.CameraPermissionHelper
-import com.google.ar.core.ArCoreApk
+import com.chuahamilton.arpong.viewmodels.MainViewModel
+import com.google.ar.core.Session
 
 
 class BaseFragment : Fragment() {
 
+    private lateinit var session: Session
     private val TAG = MainActivity::class.java.simpleName
     private val MIN_OPENGL_VERSION = 3.0
 
     // Tracks if we have already triggered an installation request.
-    private var install_requested_: Boolean = false
+    private var installRequested: Boolean = false
+
+    private lateinit var viewModel: MainViewModel
 
     companion object {
         fun newInstance() = BaseFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
-
 
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // ARCore requires camera permission to operate.
+        CameraPermissionHelper.isCameraPermissionGranted(activity!!)
+
         if (!checkIsSupportedDeviceOrFinish(activity!!)) {
             return
         }
 
+        installRequested = false
+
+    }
+
+    @Override
+    override fun onResume() {
+        super.onResume()
+
+        session = Session(context!!)
+
+        // ARCore requires camera permission to operate.
+        CameraPermissionHelper.isCameraPermissionGranted(activity!!)
     }
 
     override fun onCreateView(
