@@ -4,7 +4,12 @@
       name: '_User_Library_fender_strat_30_x_10mm_findefault',
       parameters: [
         {
-          baseColor: null,
+          baseColor: [
+            255,
+            255,
+            255,
+            1,
+          ],
         },
         {
           baseColorTint: [

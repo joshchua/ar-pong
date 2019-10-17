@@ -4,7 +4,12 @@
       name: 'mat21',
       parameters: [
         {
-          baseColor: null,
+          baseColor: [
+            255,
+            255,
+            255,
+            1,
+          ],
         },
         {
           baseColorTint: [
@@ -37,6 +42,7 @@
     file: 'sampledata/paddle.obj',
     name: 'paddle',
     recenter: 'root',
+    scale: 1,
   },
   version: '0.54:2',
 }
