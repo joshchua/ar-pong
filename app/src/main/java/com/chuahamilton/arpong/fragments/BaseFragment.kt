@@ -33,7 +33,6 @@ class BaseFragment : Fragment() {
         fun newInstance() = BaseFragment()
     }
 
-
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,5 +101,4 @@ class BaseFragment : Fragment() {
             ).show()
         }
     }
-
 }

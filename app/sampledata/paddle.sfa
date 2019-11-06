@@ -4,12 +4,7 @@
       name: 'mat21',
       parameters: [
         {
-          baseColor: [
-            255,
-            255,
-            255,
-            1,
-          ],
+          baseColor: null,
         },
         {
           baseColorTint: [
