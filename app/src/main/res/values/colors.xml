@@ -5,4 +5,5 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="arpong_white">#FFFFFF</color>
     <color name="arpong_black">#000000</color>
+    <color name="arpong_hint">#808080</color>
 </resources>
