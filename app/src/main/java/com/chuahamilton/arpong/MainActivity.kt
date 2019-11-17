@@ -2,19 +2,21 @@ package com.chuahamilton.arpong
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.chuahamilton.arpong.fragments.BaseFragment
+import androidx.appcompat.app.AppCompatDelegate
+import com.chuahamilton.arpong.fragments.LoginFragment
 import java.lang.Thread.sleep
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         sleep(1000)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, BaseFragment())
+                .replace(R.id.container, LoginFragment())
                 .commitNow()
         }
     }

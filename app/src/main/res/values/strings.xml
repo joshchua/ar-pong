@@ -1,5 +1,13 @@
 <resources>
+
     <string name="app_name">AR Pong</string>
-    <string name="play">Play</string>
-    <string name="camera_permission_toast">This app requires camera permissions to be enabled</string>
+
+<!--LoginFragment-->
+    <string name="create_username">Create Username</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+
+
+<!--MainMenuFragment-->
+    <string name="welcomeMessage">Welcome %s!</string>
 </resources>
