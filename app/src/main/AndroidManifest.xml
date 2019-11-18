@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher"
         tools:ignore="GoogleAppIndexingWarning">
+        <service
+            android:enabled="true"
+            android:name="com.chuahamilton.arpong.services.BackgroundMusicService" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
