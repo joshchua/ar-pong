@@ -2,12 +2,18 @@
 
     <string name="app_name">AR Pong</string>
 
-<!--LoginFragment-->
+    <!--LoginFragment-->
     <string name="create_username">Create Username</string>
     <string name="login">Login</string>
     <string name="username">Username</string>
 
 
-<!--MainMenuFragment-->
+    <!--MainMenuFragment-->
     <string name="welcomeMessage">Welcome %s!</string>
+    <string name="new_game">New game</string>
+    <string name="ai_difficulty">AI Difficulty</string>
+    <string name="difficulty_level">%s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
