@@ -14,10 +14,6 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    compileOptions {
-        sourceCompatibility kotlin_version
-        targetCompatibility kotlin_version
-    }
     buildTypes {
         release {
             minifyEnabled false
@@ -50,19 +46,3 @@ dependencies {
         exclude group: "com.android.support"
     }
 }
-
-
-sceneform.asset('sampledata/paddle.obj',
-        'default',
-        'sampledata/paddle.sfa',
-        'src/main/assets/paddle')
-
-sceneform.asset('sampledata/ball.obj',
-        'default',
-        'sampledata/ball.sfa',
-        'src/main/assets/ball')
-
-sceneform.asset('sampledata/Tennis_Ball_01.obj',
-        'default',
-        'sampledata/Tennis_Ball_01.sfa',
-        'src/main/assets/Tennis_Ball_01')
