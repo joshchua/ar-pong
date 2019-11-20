@@ -71,10 +71,12 @@ class MainMenu : Fragment() {
 //        gameFragment.arguments = bundle
 
         newGameBtn.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction()
-                .replace(R.id.container, GameFragment())
-                .addToBackStack(null)
-                .commit()
+            activity!!.runOnUiThread {
+                activity!!.supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, GameFragment())
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
     }
 
