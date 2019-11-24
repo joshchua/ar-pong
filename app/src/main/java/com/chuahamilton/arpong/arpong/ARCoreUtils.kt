@@ -25,14 +25,22 @@ fun checkIsSupportedDeviceOrFinish(TAG: String, activity: AppCompatActivity): Bo
     return true
 }
 
-suspend fun makeSphereRenderable(context: Context, radius: Float, position: Vector3, color: Color): ModelRenderable = withContext(
-    Dispatchers.Main) {
+suspend fun makeSphereRenderable(
+    context: Context,
+    radius: Float,
+    position: Vector3,
+    color: Color
+): ModelRenderable = withContext(
+    Dispatchers.Main
+) {
     val material = MaterialFactory.makeOpaqueWithColor(context, color).await()
     ShapeFactory.makeSphere(radius, position, material)
 }
 
-suspend fun makeCubeRenderable(context: Context, size: Vector3, position: Vector3, color: Color) = withContext(
-    Dispatchers.Main) {
-    val material = MaterialFactory.makeOpaqueWithColor(context, color).await()
-    ShapeFactory.makeCube(size, position, material)
-}
+suspend fun makeCubeRenderable(context: Context, size: Vector3, position: Vector3, color: Color) =
+    withContext(
+        Dispatchers.Main
+    ) {
+        val material = MaterialFactory.makeOpaqueWithColor(context, color).await()
+        ShapeFactory.makeCube(size, position, material)
+    }

@@ -4,11 +4,9 @@
     package="com.chuahamilton.arpong">
 
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <!-- Indicates that the app requires ARCore ("AR Required"). Ensures the app is
-         visible only in the Google Play Store on devices that support ARCore.
-    -->
-    <uses-feature android:name="android.hardware.camera.ar" />
+    <uses-feature
+        android:name="android.hardware.camera.ar"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -18,11 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher"
         tools:ignore="GoogleAppIndexingWarning">
-        <service
-            android:enabled="true"
-            android:name="com.chuahamilton.arpong.services.BackgroundMusicService" />
 
-        <activity android:name=".MainActivity">
+        <service
+            android:name=".services.BackgroundMusicService"
+            android:enabled="true" />
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,10 +31,12 @@
             </intent-filter>
         </activity>
 
-        <!-- Indicates that the app requires ARCore ("AR Required"). Causes the Google
-             Play Store to download and install Google Play Services for AR when the
-             app is installed.
-        -->
+        <activity
+            android:name=".ARPongGameActivity"
+            android:label="@string/title_activity_arpong_game"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
         <meta-data
             android:name="com.google.ar.core"
             android:value="required" />

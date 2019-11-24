@@ -1,6 +1,7 @@
 package com.chuahamilton.arpong.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,12 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.fragment.app.Fragment
+import com.chuahamilton.arpong.ARPongGameActivity
 import com.chuahamilton.arpong.R
 import kotlinx.android.synthetic.main.fragment_main_menu.*
 
 
-class MainMenu : Fragment() {
+class MainMenuFragment : Fragment() {
 
     private var username = ""
     private var difficultyLevel = "Easy"
@@ -46,11 +48,9 @@ class MainMenu : Fragment() {
         difficultyBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                // TODO Auto-generated method stub
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
-                // TODO Auto-generated method stub
             }
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -71,13 +71,15 @@ class MainMenu : Fragment() {
 //        gameFragment.arguments = bundle
 
         newGameBtn.setOnClickListener {
-            activity!!.runOnUiThread {
-                activity!!.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, GameFragment())
-                    .addToBackStack(null)
-                    .commit()
-            }
+            val arPongGameIntent = Intent(context!!, ARPongGameActivity::class.java)
+            startActivity(arPongGameIntent)
         }
-    }
 
+//        newGameBtn.setOnClickListener {
+//            activity!!.supportFragmentManager.beginTransaction()
+//                .replace(R.id.container, GameFragment())
+//                .addToBackStack(null)
+//                .commit()
+//        }
+    }
 }
