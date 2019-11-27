@@ -14,52 +14,49 @@ import com.google.ar.sceneform.ux.ArFragment
 
 class GameFragment : ArFragment() {
 
-    private lateinit var arPongBaseNode: ArPongBaseNode
-    private lateinit var gestureDetector: GestureDetector
-    private var paddleInput = 0
     private var gamePlaced = false
+
+    private lateinit var arPongBaseNode: ArPongBaseNode
+
+    private lateinit var gestureDetector: GestureDetector
+
+    private var paddleInput = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = super.onCreateView(inflater, container, savedInstanceState)
 
-        val rootView: View = inflater.inflate(R.layout.fragment_game, container, false)
-        val arContainer: LinearLayout = rootView.findViewById(R.id.ar_container)
-        val arView = super.onCreateView(inflater, arContainer, savedInstanceState)
+        gestureDetector = GestureDetector(context, object: GestureDetector.SimpleOnGestureListener() {
 
-        arContainer.addView(arView)
+            override fun onDown(event: MotionEvent): Boolean {
+                return true
+            }
 
-        gestureDetector =
-            GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
-
-                override fun onDown(event: MotionEvent): Boolean {
-                    return true
-                }
-
-                override fun onScroll(
-                    e1: MotionEvent?,
-                    e2: MotionEvent?,
-                    distanceX: Float,
-                    distanceY: Float
-                ): Boolean {
-                    if (e1 != null && e2 != null) {
-                        val difference = e1.rawX - e2.rawX
-                        when {
-                            difference < 0 -> paddleInput = -1
-                            difference == 0.0f -> paddleInput = 0
-                            difference > 0 -> paddleInput = 1
-                        }
+            override fun onScroll(
+                e1: MotionEvent?,
+                e2: MotionEvent?,
+                distanceX: Float,
+                distanceY: Float
+            ): Boolean {
+                if (e1 != null && e2 != null) {
+                    val difference = e1.rawX - e2.rawX
+                    when {
+                        difference < 0 -> paddleInput = -1
+                        difference == 0.0f -> paddleInput = 0
+                        difference > 0 -> paddleInput = 1
                     }
-
-                    arPongBaseNode.playerInput = paddleInput
-                    return super.onScroll(e1, e2, distanceX, distanceY)
                 }
-            })
+                if (gamePlaced)
+                    arPongBaseNode.playerInput = paddleInput
+                return super.onScroll(e1, e2, distanceX, distanceY)
+            }
+        })
 
         arSceneView.scene.setOnTouchListener { hitTestResult, motionEvent ->
-            if (motionEvent.action == MotionEvent.ACTION_UP) {
+            if (motionEvent.action == MotionEvent.ACTION_UP && gamePlaced) {
                 paddleInput = 0
                 arPongBaseNode.playerInput = 0
             }
@@ -72,16 +69,14 @@ class GameFragment : ArFragment() {
             }
         }
 
-        return rootView
+        return view
     }
 
-    private fun placeGame(anchor: Anchor) {
+    private fun placeGame(anchor: Anchor)  {
         val anchorNode = AnchorNode(anchor)
         anchorNode.setParent(arSceneView.scene)
         arPongBaseNode = ArPongBaseNode(activity as Context)
         anchorNode.addChild(arPongBaseNode)
         gamePlaced = true
     }
-
-
 }
