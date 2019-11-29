@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
         loginBtn.setOnClickListener {
             this.bundle.putString("username", usernameEditText.text.toString())
 
-            val mainMenuFragment = MainMenu()
+            val mainMenuFragment = MainMenuFragment()
             mainMenuFragment.arguments = bundle
 
             activity!!.supportFragmentManager.beginTransaction()
