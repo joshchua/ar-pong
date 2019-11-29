@@ -44,9 +44,9 @@ class GameFragment : ArFragment() {
                 if (e1 != null && e2 != null) {
                     val difference = e1.rawX - e2.rawX
                     when {
-                        difference < 0 -> paddleInput = -1
+                        difference < 0 -> paddleInput = 1
                         difference == 0.0f -> paddleInput = 0
-                        difference > 0 -> paddleInput = 1
+                        difference > 0 -> paddleInput = -1
                     }
                 }
                 if (gamePlaced)

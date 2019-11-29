@@ -2,6 +2,7 @@ package com.chuahamilton.arpong.arpong
 
 import android.content.Context
 import android.graphics.Color.parseColor
+import com.chuahamilton.arpong.pong.Pong
 import com.google.ar.sceneform.FrameTime
 import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.math.Vector3
@@ -11,6 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ArPongBaseNode(private val context: Context) : Node() {
+
+    private val game = Pong()
 
     private val ball = Node()
 
@@ -30,13 +33,20 @@ class ArPongBaseNode(private val context: Context) : Node() {
 
     override fun onUpdate(frameTime: FrameTime?) {
         super.onUpdate(frameTime)
-        // TODO: Implement game loop
-        if (player1Paddle.renderable == null) return
 
-        if (playerInput < 0)
-            player1Paddle.localPosition = Vector3(player1Paddle.localPosition.x + 0.01f, player1Paddle.localPosition.y, player1Paddle.localPosition.z)
-        else if (playerInput > 0)
-            player1Paddle.localPosition = Vector3(player1Paddle.localPosition.x - 0.01f, player1Paddle.localPosition.y, player1Paddle.localPosition.z)
+        game.handlePlayer1Input(playerInput)
+        game.update()
+        renderGame()
+    }
+
+    private fun renderGame() {
+        if (player1Paddle.renderable == null ||
+            player2Paddle.renderable == null ||
+            ball.renderable == null) return
+
+        ball.localPosition = Vector3(0.0f + game.ball.x, ball.localPosition.y, game.ball.y + 0.0f)
+        player1Paddle.localPosition = Vector3(0.0f + game.player1Paddle.x, player1Paddle.localPosition.y, player1Paddle.localPosition.z)
+        player2Paddle.localPosition = Vector3(0.0f + game.player2Paddle.x, player2Paddle.localPosition.y, player2Paddle.localPosition.z)
     }
 
     private fun createBoard() {
