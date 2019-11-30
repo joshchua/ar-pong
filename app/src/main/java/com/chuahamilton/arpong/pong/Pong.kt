@@ -1,6 +1,10 @@
 package com.chuahamilton.arpong.pong
 
-class Pong {
+import android.content.Context
+import android.media.MediaPlayer
+import com.chuahamilton.arpong.R
+
+class Pong(private val context: Context) {
     val ball = Ball(0.0f, 0.0f, 0.00f, 0.01f, 0.05f)
 
     val player1Paddle = Paddle(0.0f, 0.5f, 0.2f, 0.1f)
@@ -10,6 +14,9 @@ class Pong {
     private val rightWall = 0.5f
 
     private val middleOfBoard = 0.0f
+
+    private val computerPaddleSoundEffect = MediaPlayer.create(context, R.raw.computer_paddle_hit)
+    private val playerPaddleSoundEffect = MediaPlayer.create(context, R.raw.player_paddle_hit)
 
     var player1Score = 0
     var player2Score = 0
@@ -107,7 +114,10 @@ class Pong {
             if (topY < (player1Paddle.y + player1Paddle.height) &&
                 bottomY > player1Paddle.y &&
                 topX < (player1Paddle.x + player1Paddle.width) &&
-                bottomX > player1Paddle.x) {
+                bottomX > player1Paddle.x
+            ) {
+
+                playerPaddleSoundEffect.start()
 
                 ball.ySpeed = -0.01f
                 ball.xSpeed += player1Paddle.xSpeed / 2
@@ -119,7 +129,10 @@ class Pong {
             if (topY < (player2Paddle.y + player2Paddle.height) &&
                 bottomY > player2Paddle.y &&
                 topX < (player2Paddle.x + player2Paddle.width) &&
-                bottomX > player2Paddle.x) {
+                bottomX > player2Paddle.x
+            ) {
+
+                computerPaddleSoundEffect.start()
 
                 ball.ySpeed = 0.01f
                 ball.xSpeed += player2Paddle.xSpeed / 2
