@@ -4,9 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.chuahamilton.arpong.arpong.checkIsSupportedDeviceOrFinish
 import com.chuahamilton.arpong.fragments.LoginFragment
-import com.chuahamilton.arpong.services.BackgroundMusicService
+import com.chuahamilton.arpong.services.IntroMusicService
 import java.lang.Thread.sleep
 
 
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startMusic(): Intent{
-        val musicService = Intent(this, BackgroundMusicService::class.java)
+        val musicService = Intent(this, IntroMusicService::class.java)
         startService(musicService)
         return musicService
     }
