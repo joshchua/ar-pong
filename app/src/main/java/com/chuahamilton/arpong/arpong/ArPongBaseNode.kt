@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class ArPongBaseNode(private val context: Context) : Node() {
 
-    private val game = Pong()
+    private val game = Pong(context)
 
     private val ball = Node()
 
@@ -42,11 +42,20 @@ class ArPongBaseNode(private val context: Context) : Node() {
     private fun renderGame() {
         if (player1Paddle.renderable == null ||
             player2Paddle.renderable == null ||
-            ball.renderable == null) return
+            ball.renderable == null
+        ) return
 
         ball.localPosition = Vector3(0.0f + game.ball.x, ball.localPosition.y, game.ball.y + 0.0f)
-        player1Paddle.localPosition = Vector3(0.0f + game.player1Paddle.x, player1Paddle.localPosition.y, player1Paddle.localPosition.z)
-        player2Paddle.localPosition = Vector3(0.0f + game.player2Paddle.x, player2Paddle.localPosition.y, player2Paddle.localPosition.z)
+        player1Paddle.localPosition = Vector3(
+            0.0f + game.player1Paddle.x,
+            player1Paddle.localPosition.y,
+            player1Paddle.localPosition.z
+        )
+        player2Paddle.localPosition = Vector3(
+            0.0f + game.player2Paddle.x,
+            player2Paddle.localPosition.y,
+            player2Paddle.localPosition.z
+        )
     }
 
     private fun createBoard() {
