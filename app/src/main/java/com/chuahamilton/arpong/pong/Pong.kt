@@ -61,7 +61,7 @@ class Pong( context: Context, private val difficultyLevel: DifficultyLevel) {
         }
 
         val player2Dist = abs(ball.y - player2Paddle.y)
-        if (player2Dist > 0.4) {
+        if (player2Dist > 0.3) {
             player2Paddle.x = ball.x
             player2Stuck = false
         } else {
