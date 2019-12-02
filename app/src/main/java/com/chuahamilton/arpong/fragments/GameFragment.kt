@@ -79,7 +79,7 @@ class GameFragment : ArFragment() {
     private fun placeGame(anchor: Anchor) {
         val anchorNode = AnchorNode(anchor)
         anchorNode.setParent(arSceneView.scene)
-        arPongBaseNode = ArPongBaseNode(activity as Context)
+        arPongBaseNode = ArPongBaseNode(activity as Context, difficultyLevel)
         anchorNode.addChild(arPongBaseNode)
         gamePlaced = true
     }

@@ -3,8 +3,11 @@ package com.chuahamilton.arpong.pong
 import android.content.Context
 import android.media.MediaPlayer
 import com.chuahamilton.arpong.R
+import com.chuahamilton.arpong.utils.DifficultyLevel
+import kotlin.math.abs
+import kotlin.random.Random
 
-class Pong(private val context: Context) {
+class Pong( context: Context, private val difficultyLevel: DifficultyLevel) {
     val ball = Ball(0.0f, 0.0f, 0.00f, 0.01f, 0.05f)
 
     val player1Paddle = Paddle(0.0f, 0.5f, 0.2f, 0.1f)
@@ -20,6 +23,8 @@ class Pong(private val context: Context) {
 
     var player1Score = 0
     var player2Score = 0
+
+    var player2Stuck = false
 
     fun handlePlayer1Input(input: Int) {
         when {
@@ -48,11 +53,23 @@ class Pong(private val context: Context) {
     }
 
     private fun updatePlayer2() {
-        player2Paddle.x = ball.x
+
         if (ball.xSpeed < 0) {
             player2Paddle.xSpeed = -0.02f
         } else {
             player2Paddle.xSpeed = 0.02f
+        }
+
+        val player2Dist = abs(ball.y - player2Paddle.y)
+        if (player2Dist > 0.4) {
+            player2Paddle.x = ball.x
+            player2Stuck = false
+        } else {
+            when (difficultyLevel) {
+                DifficultyLevel.EASY -> freezePlayer2Paddle(2)
+                DifficultyLevel.NORMAL -> freezePlayer2Paddle(4)
+                DifficultyLevel.HARD -> freezePlayer2Paddle(8)
+            }
         }
 
         val halfPaddleWidth = player2Paddle.width / 2
@@ -62,6 +79,17 @@ class Pong(private val context: Context) {
         } else if (player2Paddle.x + halfPaddleWidth > rightWall) {
             player2Paddle.x = rightWall - halfPaddleWidth
             player2Paddle.xSpeed = 0.0f
+        }
+
+    }
+
+    private fun freezePlayer2Paddle(range: Int) {
+        val boardWidth = abs(leftWall - rightWall)
+        if (!player2Stuck) {
+            val dist = boardWidth / range
+            val random = Random.nextFloat() * dist
+            player2Paddle.x = ball.x - (random / 2)
+            player2Stuck = true
         }
     }
 
