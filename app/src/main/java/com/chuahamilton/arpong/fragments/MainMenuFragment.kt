@@ -65,21 +65,9 @@ class MainMenuFragment : Fragment() {
     }
 
     private fun initializeButtons() {
-
-//        this.bundle.putString("difficultyKey", difficultyLevel)
-//        val gameFragment = GameFragment()
-//        gameFragment.arguments = bundle
-
         newGameBtn.setOnClickListener {
             val arPongGameIntent = Intent(context!!, ARPongGameActivity::class.java)
             startActivity(arPongGameIntent)
         }
-
-//        newGameBtn.setOnClickListener {
-//            activity!!.supportFragmentManager.beginTransaction()
-//                .replace(R.id.container, GameFragment())
-//                .addToBackStack(null)
-//                .commit()
-//        }
     }
 }

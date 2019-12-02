@@ -2,6 +2,7 @@ package com.chuahamilton.arpong.arpong
 
 import android.content.Context
 import android.graphics.Color.parseColor
+import android.widget.TextView
 import com.chuahamilton.arpong.R
 import com.chuahamilton.arpong.pong.Pong
 import com.google.ar.sceneform.FrameTime
@@ -28,6 +29,9 @@ class ArPongBaseNode(private val context: Context) : Node() {
 
     private val scoreboardNode = Node()
 
+    private var oldPlayer1Score = 0
+    private var oldPlayer2Score = 0
+
     var playerInput: Int = 0
 
     override fun onActivate() {
@@ -44,6 +48,21 @@ class ArPongBaseNode(private val context: Context) : Node() {
         game.handlePlayer1Input(playerInput)
         game.update()
         renderGame()
+        updateScoreboard()
+    }
+
+    private fun updateScoreboard() {
+        if (scoreboardNode.renderable == null) return
+
+        if (oldPlayer1Score != game.player1Score || oldPlayer2Score != game.player2Score) {
+            val scoreboardView = (scoreboardNode.renderable as ViewRenderable).view
+            val player1ScoreTextView = scoreboardView.findViewById<TextView>(R.id.player1Score)
+            val player2ScoreTextView = scoreboardView.findViewById<TextView>(R.id.player2Score)
+            player1ScoreTextView.text = game.player1Score.toString()
+            player2ScoreTextView.text = game.player2Score.toString()
+            oldPlayer1Score = game.player1Score
+            oldPlayer2Score = game.player2Score
+        }
     }
 
     private fun renderGame() {
