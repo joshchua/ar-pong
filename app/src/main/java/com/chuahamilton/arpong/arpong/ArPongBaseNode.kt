@@ -14,7 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.google.ar.sceneform.rendering.ViewRenderable
-
+import kotlinx.android.synthetic.main.arpong_scoreboard.view.*
 
 
 class ArPongBaseNode(private val context: Context) : Node() {
@@ -53,8 +53,8 @@ class ArPongBaseNode(private val context: Context) : Node() {
 
         if (oldPlayer1Score != game.player1Score || oldPlayer2Score != game.player2Score) {
             val scoreboardView = (scoreboardNode.renderable as ViewRenderable).view
-            val player1ScoreTextView = scoreboardView.findViewById<TextView>(R.id.player1Score)
-            val player2ScoreTextView = scoreboardView.findViewById<TextView>(R.id.player2Score)
+            val player1ScoreTextView = scoreboardView.player1Score
+            val player2ScoreTextView = scoreboardView.player2Score
             player1ScoreTextView.text = game.player1Score.toString()
             player2ScoreTextView.text = game.player2Score.toString()
             oldPlayer1Score = game.player1Score
