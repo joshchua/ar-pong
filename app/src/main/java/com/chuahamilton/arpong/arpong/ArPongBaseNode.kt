@@ -2,19 +2,17 @@ package com.chuahamilton.arpong.arpong
 
 import android.content.Context
 import android.graphics.Color.parseColor
-import android.widget.TextView
 import com.chuahamilton.arpong.R
 import com.chuahamilton.arpong.pong.Pong
 import com.google.ar.sceneform.FrameTime
 import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.Color
-import com.google.ar.sceneform.rendering.ModelRenderable
+import com.google.ar.sceneform.rendering.ViewRenderable
+import kotlinx.android.synthetic.main.arpong_scoreboard.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import com.google.ar.sceneform.rendering.ViewRenderable
-import kotlinx.android.synthetic.main.arpong_scoreboard.view.*
 
 
 class ArPongBaseNode(private val context: Context) : Node() {
@@ -105,7 +103,7 @@ class ArPongBaseNode(private val context: Context) : Node() {
     }
 
     private fun createPaddles() = CoroutineScope(Dispatchers.Main).launch {
-        val paddleSize = Vector3(0.2f, 0.1f, 0.1f)
+        val paddleSize = Vector3(0.2f, 0.1f, 0.05f)
         val paddleColor = Color(parseColor("#379457"))
 
         player1Paddle.renderable = makeCubeRenderable(

@@ -1,23 +1,26 @@
 package com.chuahamilton.arpong.pong
 
+import android.app.AlertDialog
 import android.content.Context
 import android.media.MediaPlayer
+import android.view.LayoutInflater
 import com.chuahamilton.arpong.R
+import kotlinx.android.synthetic.main.game_winner_dialog.view.*
 
-class Pong(private val context: Context) {
+class Pong(context: Context) {
     val ball = Ball(0.0f, 0.0f, 0.00f, 0.01f, 0.05f)
-
     val player1Paddle = Paddle(0.0f, 0.5f, 0.2f, 0.1f)
     val player2Paddle = Paddle(0.0f, -0.5f, 0.2f, 0.1f)
 
     private val leftWall = -0.5f
     private val rightWall = 0.5f
-
     private val middleOfBoard = 0.0f
+    private val context = context
 
     private val computerPaddleSoundEffect = MediaPlayer.create(context, R.raw.computer_paddle_hit)
     private val playerPaddleSoundEffect = MediaPlayer.create(context, R.raw.player_paddle_hit)
 
+    private val WINNING_SCORE = 10
     var player1Score = 0
     var player2Score = 0
 
@@ -90,10 +93,22 @@ class Pong(private val context: Context) {
 
         if (ball.y > player1Wall) {
             player2Score += 1
-            respawnBall()
+            if (player2Score == WINNING_SCORE) {
+                stopBall()
+                gameOverPopup("CPU")
+            } else {
+                respawnBall()
+            }
+
+
         } else if (ball.y < player2Wall) {
             player1Score += 1
-            respawnBall()
+            if (player1Score == WINNING_SCORE) {
+                stopBall()
+                gameOverPopup("Player 1")
+            } else {
+                respawnBall()
+            }
         }
     }
 
@@ -102,6 +117,20 @@ class Pong(private val context: Context) {
         ball.y = middleOfBoard
         ball.xSpeed = 0.0f
         ball.ySpeed = 0.01f
+    }
+
+    private fun stopBall() {
+        ball.x = kotlin.math.abs(leftWall + rightWall) / 2
+        ball.y = middleOfBoard
+        ball.xSpeed = 0.0f
+        ball.ySpeed = 0.0f
+    }
+
+    private fun restartGame() {
+        player1Score = 0
+        player2Score = 0
+
+        respawnBall()
     }
 
     private fun handlePaddleCollision() {
@@ -142,4 +171,19 @@ class Pong(private val context: Context) {
             }
         }
     }
+
+    private fun gameOverPopup(playerName: String) {
+
+        val mDialogView = LayoutInflater.from(context).inflate(R.layout.game_winner_dialog, null)
+        val mBuilder = AlertDialog.Builder(context)
+            .setView(mDialogView)
+        val  mAlertDialog = mBuilder.show()
+        mAlertDialog.window!!.setLayout(800, 900)
+        mDialogView.winnerNameText.text = playerName
+        mDialogView.playAgainBtn.setOnClickListener {
+            restartGame()
+            mAlertDialog.dismiss()
+        }
+    }
+
 }
