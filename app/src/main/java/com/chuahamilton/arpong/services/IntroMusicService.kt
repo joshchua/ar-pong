@@ -17,7 +17,7 @@ class IntroMusicService : Service() {
         super.onCreate()
         player = MediaPlayer.create(this, R.raw.intro_theme)
         player.isLooping = true // Set looping
-        player.setVolume(100f, 100f)
+        player.setVolume(0.5f, 0.5f)
         player.start()
     }
 
