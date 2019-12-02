@@ -69,12 +69,12 @@ class ArPongBaseNode(private val context: Context, difficultyLevel: DifficultyLe
 
         ball.localPosition = Vector3(0.0f + game.ball.x, ball.localPosition.y, game.ball.y + 0.0f)
         player1Paddle.localPosition = Vector3(
-            0.0f + game.player1Paddle.x,
+            0.0f + game.player1Paddle.x + (game.player1Paddle.width / 2),
             player1Paddle.localPosition.y,
             player1Paddle.localPosition.z
         )
         player2Paddle.localPosition = Vector3(
-            0.0f + game.player2Paddle.x,
+            0.0f + game.player2Paddle.x + (game.player2Paddle.width / 2),
             player2Paddle.localPosition.y,
             player2Paddle.localPosition.z
         )
