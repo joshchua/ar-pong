@@ -2,14 +2,20 @@ package com.chuahamilton.arpong.arpong
 
 import android.content.Context
 import android.graphics.Color.parseColor
+import android.widget.TextView
+import com.chuahamilton.arpong.R
 import com.chuahamilton.arpong.pong.Pong
 import com.google.ar.sceneform.FrameTime
 import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.Color
+import com.google.ar.sceneform.rendering.ModelRenderable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.google.ar.sceneform.rendering.ViewRenderable
+
+
 
 class ArPongBaseNode(private val context: Context) : Node() {
 
@@ -17,6 +23,11 @@ class ArPongBaseNode(private val context: Context) : Node() {
     private val ball = Node()
     private val player1Paddle = Node()
     private val player2Paddle = Node()
+
+    private val scoreboardNode = Node()
+
+    private var oldPlayer1Score = 0
+    private var oldPlayer2Score = 0
 
     var playerInput: Int = 0
 
@@ -34,6 +45,21 @@ class ArPongBaseNode(private val context: Context) : Node() {
         game.handlePlayer1Input(playerInput)
         game.update()
         renderGame()
+        updateScoreboard()
+    }
+
+    private fun updateScoreboard() {
+        if (scoreboardNode.renderable == null) return
+
+        if (oldPlayer1Score != game.player1Score || oldPlayer2Score != game.player2Score) {
+            val scoreboardView = (scoreboardNode.renderable as ViewRenderable).view
+            val player1ScoreTextView = scoreboardView.findViewById<TextView>(R.id.player1Score)
+            val player2ScoreTextView = scoreboardView.findViewById<TextView>(R.id.player2Score)
+            player1ScoreTextView.text = game.player1Score.toString()
+            player2ScoreTextView.text = game.player2Score.toString()
+            oldPlayer1Score = game.player1Score
+            oldPlayer2Score = game.player2Score
+        }
     }
 
     private fun renderGame() {
@@ -59,6 +85,13 @@ class ArPongBaseNode(private val context: Context) : Node() {
         createBall()
         createPaddles()
         createWalls()
+        createScoreboard()
+    }
+
+    private fun createScoreboard() = CoroutineScope(Dispatchers.Main).launch {
+        scoreboardNode.renderable = makeViewRenderable(context, R.layout.arpong_scoreboard)
+        scoreboardNode.localPosition = Vector3(0.0f, 0.5f, 0.0f)
+        addChild(scoreboardNode)
     }
 
     private fun createBall() = CoroutineScope(Dispatchers.Main).launch {

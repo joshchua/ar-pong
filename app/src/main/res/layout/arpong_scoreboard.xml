@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scoreboardView"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:backgroundTint="@color/arpong_white">
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:background="@color/scoreboard_white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -21,11 +21,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/score_font"
-            android:textSize="18sp"
+            android:textSize="10sp"
+            android:text="P1"
+            android:textColor="@color/arpong_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Player 1" />
+            tools:text="P1" />
 
         <TextView
             android:id="@+id/player1Score"
@@ -33,7 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/score_font"
-            android:textSize="60sp"
+            android:textSize="25sp"
+            android:text="0"
+            android:textColor="@color/arpong_black"
             app:layout_constraintEnd_toEndOf="@id/player1Text"
             app:layout_constraintStart_toStartOf="@id/player1Text"
             app:layout_constraintTop_toBottomOf="@id/player1Text"
@@ -55,11 +59,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/score_font"
-            android:textSize="18sp"
+            android:textSize="10sp"
+            android:text="CPU"
+            android:textColor="@color/arpong_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Player 2" />
+            tools:text="CPU" />
 
         <TextView
             android:id="@+id/player2Score"
@@ -67,7 +73,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/score_font"
-            android:textSize="60sp"
+            android:textSize="25sp"
+            android:text="0"
+            android:textColor="@color/arpong_black"
             app:layout_constraintEnd_toEndOf="@id/player2Text"
             app:layout_constraintStart_toStartOf="@id/player2Text"
             app:layout_constraintTop_toBottomOf="@id/player2Text"

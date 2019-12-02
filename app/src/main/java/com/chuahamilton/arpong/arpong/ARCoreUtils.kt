@@ -6,10 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.ar.sceneform.math.Vector3
-import com.google.ar.sceneform.rendering.Color
-import com.google.ar.sceneform.rendering.MaterialFactory
-import com.google.ar.sceneform.rendering.ModelRenderable
-import com.google.ar.sceneform.rendering.ShapeFactory
+import com.google.ar.sceneform.rendering.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.future.await
 import kotlinx.coroutines.withContext
@@ -37,10 +34,18 @@ suspend fun makeSphereRenderable(
     ShapeFactory.makeSphere(radius, position, material)
 }
 
-suspend fun makeCubeRenderable(context: Context, size: Vector3, position: Vector3, color: Color) =
-    withContext(
+suspend fun makeCubeRenderable(
+    context: Context,
+    size: Vector3,
+    position: Vector3,
+    color: Color) = withContext(
         Dispatchers.Main
-    ) {
-        val material = MaterialFactory.makeOpaqueWithColor(context, color).await()
-        ShapeFactory.makeCube(size, position, material)
-    }
+) {
+    val material = MaterialFactory.makeOpaqueWithColor(context, color).await()
+    ShapeFactory.makeCube(size, position, material)
+}
+
+suspend fun makeViewRenderable(context: Context, viewId: Int) = withContext(Dispatchers.Main) {
+    val viewRenderable: ViewRenderable = ViewRenderable.builder().setView(context, viewId).build().await()
+    viewRenderable
+}
