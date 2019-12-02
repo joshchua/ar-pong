@@ -44,8 +44,9 @@
         <SeekBar
             android:id="@+id/difficultyBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_margin="20dp"
+            android:thumb="@drawable/seekbar_thumb"
             android:max="2"
             android:progress="0"
             app:layout_constraintEnd_toEndOf="parent"
