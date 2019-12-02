@@ -31,7 +31,8 @@ class MainMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        difficultyLevelText.text = getString(R.string.difficulty_level, difficultyLevel)
+        difficultyLevelText.text = getString(R.string.difficulty_level, "Easy")
+        difficultyLevel = DifficultyLevel.EASY
 
         initializeButtons()
         setUsername()

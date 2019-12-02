@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color.parseColor
 import com.chuahamilton.arpong.R
 import com.chuahamilton.arpong.pong.Pong
+import com.chuahamilton.arpong.utils.DifficultyLevel
 import com.google.ar.sceneform.FrameTime
 import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.math.Vector3
@@ -15,9 +16,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ArPongBaseNode(private val context: Context) : Node() {
+class ArPongBaseNode(private val context: Context, difficultyLevel: DifficultyLevel) : Node() {
 
-    private val game = Pong(context)
+    private val game = Pong(context, difficultyLevel)
     private val ball = Node()
     private val player1Paddle = Node()
     private val player2Paddle = Node()
@@ -132,7 +133,7 @@ class ArPongBaseNode(private val context: Context) : Node() {
         leftWall.renderable = makeCubeRenderable(
             context,
             wallSize,
-            Vector3(-0.5f, 0.1f, 0.0f),
+            Vector3(-0.5f, 0.0f, 0.0f),
             wallColor
         )
 
@@ -140,7 +141,7 @@ class ArPongBaseNode(private val context: Context) : Node() {
         rightWall.renderable = makeCubeRenderable(
             context,
             wallSize,
-            Vector3(0.5f, 0.1f, 0.0f),
+            Vector3(0.5f, 0.0f, 0.0f),
             wallColor
         )
 
