@@ -2,7 +2,6 @@ package com.chuahamilton.arpong.arpong
 
 import android.content.Context
 import android.graphics.Color.parseColor
-import android.widget.TextView
 import com.chuahamilton.arpong.R
 import com.chuahamilton.arpong.pong.Pong
 import com.chuahamilton.arpong.utils.DifficultyLevel
@@ -10,12 +9,11 @@ import com.google.ar.sceneform.FrameTime
 import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.Color
-import com.google.ar.sceneform.rendering.ModelRenderable
+import com.google.ar.sceneform.rendering.ViewRenderable
+import kotlinx.android.synthetic.main.arpong_scoreboard.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import com.google.ar.sceneform.rendering.ViewRenderable
-
 
 
 class ArPongBaseNode(private val context: Context, difficultyLevel: DifficultyLevel) : Node() {
@@ -54,8 +52,8 @@ class ArPongBaseNode(private val context: Context, difficultyLevel: DifficultyLe
 
         if (oldPlayer1Score != game.player1Score || oldPlayer2Score != game.player2Score) {
             val scoreboardView = (scoreboardNode.renderable as ViewRenderable).view
-            val player1ScoreTextView = scoreboardView.findViewById<TextView>(R.id.player1Score)
-            val player2ScoreTextView = scoreboardView.findViewById<TextView>(R.id.player2Score)
+            val player1ScoreTextView = scoreboardView.player1Score
+            val player2ScoreTextView = scoreboardView.player2Score
             player1ScoreTextView.text = game.player1Score.toString()
             player2ScoreTextView.text = game.player2Score.toString()
             oldPlayer1Score = game.player1Score
@@ -106,7 +104,7 @@ class ArPongBaseNode(private val context: Context, difficultyLevel: DifficultyLe
     }
 
     private fun createPaddles() = CoroutineScope(Dispatchers.Main).launch {
-        val paddleSize = Vector3(0.2f, 0.1f, 0.1f)
+        val paddleSize = Vector3(0.2f, 0.1f, 0.05f)
         val paddleColor = Color(parseColor("#379457"))
 
         player1Paddle.renderable = makeCubeRenderable(
