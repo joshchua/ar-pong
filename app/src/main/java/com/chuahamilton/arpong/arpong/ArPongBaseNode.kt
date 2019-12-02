@@ -14,11 +14,8 @@ import kotlinx.coroutines.launch
 class ArPongBaseNode(private val context: Context) : Node() {
 
     private val game = Pong(context)
-
     private val ball = Node()
-
     private val player1Paddle = Node()
-
     private val player2Paddle = Node()
 
     var playerInput: Int = 0

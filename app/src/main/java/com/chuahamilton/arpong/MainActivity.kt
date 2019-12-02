@@ -13,7 +13,6 @@ import java.lang.Thread.sleep
 class MainActivity : AppCompatActivity() {
 
     private var mainIntent = Intent()
-    private val activityTag = "ARPongGameActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)

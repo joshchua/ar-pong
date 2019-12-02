@@ -11,14 +11,14 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.fragment.app.Fragment
 import com.chuahamilton.arpong.ARPongGameActivity
 import com.chuahamilton.arpong.R
+import com.chuahamilton.arpong.utils.DifficultyLevel
 import kotlinx.android.synthetic.main.fragment_main_menu.*
 
 
 class MainMenuFragment : Fragment() {
 
     private var username = ""
-    private var difficultyLevel = "Easy"
-    private var bundle = Bundle()
+    private var difficultyLevel: DifficultyLevel = DifficultyLevel.EASY
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,30 +56,28 @@ class MainMenuFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
 
                 when (progress) {
-                    0 -> difficultyLevelText.text = getString(R.string.difficulty_level, "Easy")
-                    1 -> difficultyLevelText.text = getString(R.string.difficulty_level, "Normal")
-                    2 -> difficultyLevelText.text = getString(R.string.difficulty_level, "Hard")
+                    0 -> {
+                        difficultyLevelText.text = getString(R.string.difficulty_level, "Easy")
+                        difficultyLevel = DifficultyLevel.EASY
+                    }
+                    1 -> {
+                        difficultyLevelText.text = getString(R.string.difficulty_level, "Normal")
+                        difficultyLevel = DifficultyLevel.NORMAL
+                    }
+                    2 -> {
+                        difficultyLevelText.text = getString(R.string.difficulty_level, "Hard")
+                        difficultyLevel = DifficultyLevel.HARD
+                    }
                 }
             }
         })
     }
 
     private fun initializeButtons() {
-
-//        this.bundle.putString("difficultyKey", difficultyLevel)
-//        val gameFragment = GameFragment()
-//        gameFragment.arguments = bundle
-
         newGameBtn.setOnClickListener {
             val arPongGameIntent = Intent(context!!, ARPongGameActivity::class.java)
+            arPongGameIntent.putExtra("DIFFICULTY", difficultyLevel)
             startActivity(arPongGameIntent)
         }
-
-//        newGameBtn.setOnClickListener {
-//            activity!!.supportFragmentManager.beginTransaction()
-//                .replace(R.id.container, GameFragment())
-//                .addToBackStack(null)
-//                .commit()
-//        }
     }
 }
