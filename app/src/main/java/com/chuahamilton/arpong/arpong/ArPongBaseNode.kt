@@ -2,14 +2,19 @@ package com.chuahamilton.arpong.arpong
 
 import android.content.Context
 import android.graphics.Color.parseColor
+import com.chuahamilton.arpong.R
 import com.chuahamilton.arpong.pong.Pong
 import com.google.ar.sceneform.FrameTime
 import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.Color
+import com.google.ar.sceneform.rendering.ModelRenderable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.google.ar.sceneform.rendering.ViewRenderable
+
+
 
 class ArPongBaseNode(private val context: Context) : Node() {
 
@@ -20,6 +25,8 @@ class ArPongBaseNode(private val context: Context) : Node() {
     private val player1Paddle = Node()
 
     private val player2Paddle = Node()
+
+    private val scoreboardNode = Node()
 
     var playerInput: Int = 0
 
@@ -62,6 +69,13 @@ class ArPongBaseNode(private val context: Context) : Node() {
         createBall()
         createPaddles()
         createWalls()
+        createScoreboard()
+    }
+
+    private fun createScoreboard() = CoroutineScope(Dispatchers.Main).launch {
+        scoreboardNode.renderable = makeViewRenderable(context, R.layout.arpong_scoreboard)
+        scoreboardNode.localPosition = Vector3(0.0f, 0.5f, 0.0f)
+        addChild(scoreboardNode)
     }
 
     private fun createBall() = CoroutineScope(Dispatchers.Main).launch {
