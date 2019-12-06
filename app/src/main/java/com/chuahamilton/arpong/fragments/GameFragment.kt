@@ -4,14 +4,11 @@ package com.chuahamilton.arpong.fragments
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import com.bumptech.glide.Glide
-import com.chuahamilton.arpong.R
 import com.chuahamilton.arpong.arpong.ArPongBaseNode
 import com.chuahamilton.arpong.utils.DifficultyLevel
 import com.google.ar.core.Anchor
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.ux.ArFragment
-import kotlinx.android.synthetic.main.game_winner_dialog.*
 
 
 class GameFragment : ArFragment() {
