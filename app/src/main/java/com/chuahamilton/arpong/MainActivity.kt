@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.findNavController
 import com.chuahamilton.arpong.fragments.LoginFragment
 import com.chuahamilton.arpong.services.IntroMusicService
+import kotlinx.android.synthetic.main.main_activity.*
 import java.lang.Thread.sleep
 
 
@@ -21,6 +23,13 @@ class MainActivity : AppCompatActivity() {
         mainIntent = startMusic()
 
         sleep(1000)
+
+        this.findNavController(nav_host_fragment.id)
+
+        val action =
+            SpecifyAmountFragmentDirections
+                .actionSpecifyAmountFragmentToConfirmationFragment()
+        view.findNavController().navigate(action)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
