@@ -4,13 +4,15 @@ import android.app.AlertDialog
 import android.content.Context
 import android.media.MediaPlayer
 import android.view.LayoutInflater
+import com.bumptech.glide.Glide
 import com.chuahamilton.arpong.R
 import com.chuahamilton.arpong.utils.DifficultyLevel
+import kotlinx.android.synthetic.main.game_winner_dialog.*
+import kotlinx.android.synthetic.main.game_winner_dialog.view.*
 import kotlin.math.abs
 import kotlin.random.Random
-import kotlinx.android.synthetic.main.game_winner_dialog.view.*
 
-class Pong( context: Context, private val difficultyLevel: DifficultyLevel) {
+class Pong(context: Context, private val difficultyLevel: DifficultyLevel) {
     val ball = Ball(0.0f, 0.0f, 0.00f, 0.01f, 0.05f)
     val player1Paddle = Paddle(0.0f, 0.5f, 0.2f, 0.1f)
     val player2Paddle = Paddle(0.0f, -0.5f, 0.2f, 0.1f)
@@ -205,9 +207,10 @@ class Pong( context: Context, private val difficultyLevel: DifficultyLevel) {
         val mDialogView = LayoutInflater.from(context).inflate(R.layout.game_winner_dialog, null)
         val mBuilder = AlertDialog.Builder(context)
             .setView(mDialogView)
-        val  mAlertDialog = mBuilder.show()
-        mAlertDialog.window!!.setLayout(800, 900)
+        val mAlertDialog = mBuilder.show()
+        mAlertDialog.window!!.setLayout(800, 1300)
         mDialogView.winnerNameText.text = playerName
+        Glide.with(mDialogView).load(R.drawable.carltondance).into(mAlertDialog.winningGif)
         mDialogView.playAgainBtn.setOnClickListener {
             restartGame()
             mAlertDialog.dismiss()
